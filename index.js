@@ -163,14 +163,22 @@ const Form = {
   description: document.querySelector('input#description'),
   amount: document.querySelector('input#amount'),
   date: document.querySelector('input#date'),
+  btn: document.getElementById("btn"),
 
   validateFields() {
     description.value === "" || 
     amount.value === "" || 
     date.value === "" ? alert("ERRO : Dados Incompletos, revise os campos") : this.formatData()
   },
-  
-  
+
+  formatEvent(e) {
+    //esse metodo e para o uso de smartphone que no teclado numerico tem apenas numeros
+    //e preciso so simbolo -
+    if (e.key.match(/[^\d-]/)) {
+        e.preventDefault();
+    }
+  },
+
 
   formatData() {
     let savedData = {
