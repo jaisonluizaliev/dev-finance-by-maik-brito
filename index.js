@@ -163,7 +163,6 @@ const Form = {
   description: document.querySelector('input#description'),
   amount: document.querySelector('input#amount'),
   date: document.querySelector('input#date'),
-  btn: document.getElementById("btn"),
 
   validateFields() {
     description.value === "" || 
@@ -174,7 +173,7 @@ const Form = {
   formatEvent(e) {
     //esse metodo e para o uso de smartphone que no teclado numerico tem apenas numeros
     //e preciso so simbolo -
-    if (e.key.match(/[^\d-]/)) {
+    if (e.key.match(/[^\d.-]/)) {
         e.preventDefault();
     }
   },
@@ -182,7 +181,7 @@ const Form = {
 
   formatData() {
     let savedData = {
-      description: String(this.description.value.toUpperCase()),
+      description: String(this.description.value),
       amount: Utils.formatAmount(Number(this.amount.value)),
       date: Utils.formatDate(this.date.value)
     }
