@@ -12,23 +12,23 @@ const Modal = {
 const Storage = {
   //pegar as informações
   get(){
-    console.log(localStorage)
+    //preciso transaformar devolta essa string que vira para um array
+    return JSON.parse(localStorage.getItem("nome_que_salva")) || []
   },
 
   //guardar as informações
   set(trasactions){
     //
-    localStorage.setItem("nome que salva", /**Valor como vou armazenar um array tenho que usar um conversor pois este valor so aceita strings*/JSON.stringify(trasactions))
-    //passo como argumento meu suposto banco de dados....
+    /**Valor como vou armazenar um array tenho que usar um conversor pois este valor so aceita strings*/
+    localStorage.setItem("nome_que_salva", JSON.stringify(trasactions))
+    //passo como argumento do meu suposto banco de dados....
   },
 }
-Storage.get()
+
 
 const Transaction = {
   //estrategiapara futuramente armazenar no local storage
-  all: [
-    
-  ],
+  all: Storage.get(),
 
   add(transaction) {
     this.all.push(transaction)
@@ -210,6 +210,8 @@ const App = {
   init() {
     Transaction.all.forEach((t, i) => DOM.addTransaction(t, i))
     DOM.updateBalance()
+    //seto meu suposto banco de dados
+    Storage.set(Transaction.all)
   },
   //funciona como um recarregamento de memoria uma vez que ainda estou usando array e não banco de dados
   reload() {
@@ -224,3 +226,4 @@ const App = {
 App.init()
 
 //COpy code 2:55
+
