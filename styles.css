@@ -287,12 +287,3 @@ footer {
   }
 }
 
-@media (max-width: 420px) {
-  td.income {
-    font-size: 8px;
-  }
-
-  td.expense {
-    font-size: 8px;
-  }
-}
